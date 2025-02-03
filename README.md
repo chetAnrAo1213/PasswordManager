@@ -3,17 +3,17 @@ Password Manager is a tool for storing and managing passwords. The Project consi
 ________________________________________________
 
 # Project Configuration
-Frontend           :- Thymeleaf Engine, Html, Css, Js, Chart-Js.
+Frontend           : Thymeleaf Engine, Html, Css, Js, Chart-Js.
 
-Backend            :- SpringBoot(V3.4), JPA(Hibernate), SpringSecurity.     
+Backend            : SpringBoot(V3.4), JPA(Hibernate), SpringSecurity.     
 
-DataBase           :- MySql(V.8)
+DataBase           : MySql(V.8)
 
-External API       :- Newsdata.io, Pexeles, Nasa.
+External API       : Newsdata.io, Pexeles, Nasa.
 
-AI Cloud Platform  :- Groq Cloud
+AI Cloud Platform  : Groq Cloud
 
-Project Management :- Maven.
+Project Management : Maven.
 _______________________________________________
 
 # Project Overview : 
