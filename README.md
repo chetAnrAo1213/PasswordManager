@@ -1,9 +1,9 @@
 # PasswordManager
-Password Manager is a Tool that is used to store your passwords with security. Provides complete User Authentication and Authorization 
+Password Manager is a tool for storing and managing passwords. The Project consists of two modules User & Admin. It provides complete user authentication and authorization, ensuring security to the passwords. The project also supports Crud Operations against a password. User can try various Password Recovery Mechanisms like SignIn with Questions,Pin or Reset the account password. User module is intergrated AI to provide a Chat Bot and Security for External Api's with visual dashboard. Admin can have write access against a user including privacy policy, and also visual dashboard. 
 ________________________________________________
 
 # Project Configuration
-Frontend           :- Thymeleaf Engine, Html, Css, Js,Chart.js.
+Frontend           :- Thymeleaf Engine, Html, Css, Js, Chart-Js.
 
 Backend            :- SpringBoot(V3.4), JPA(Hibernate), SpringSecurity.     
 
@@ -25,7 +25,7 @@ _______________________________________________
         
 	2) Crud Operations on Passwords :
  	  Add, Delete, Update, View, Decrypt a password. And also a personal note.
-        
+
 	3) AI Support :
 	  Meta AI via Groq Cloud AI-API to use Chat Bot and Security.	
         
