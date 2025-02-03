@@ -17,17 +17,23 @@ Project Management :- Maven.
 _______________________________________________
 
 # Project Overview : 
+
   User: 
   	1) Complete Authentication for the user :
    	  Password, Pin, Questions based Authentication, Mail Verification, Reset Password.
+      
 	2) Storing of Passwords :
- 	  Add, Delete, Update, View, Decrypt a password. And also create a note.			
+ 	  Add, Delete, Update, View, Decrypt a password. And also create a note.
+    
 	3) AI Support :
-	  Meta AI via Groq Cloud AI-API to use Chat Bot and Security.			
+	  Meta AI via Groq Cloud AI-API to use Chat Bot and Security.	
+   
         4) External API: 
-	  Supports External API to generate text,image,video based response.			
+	  Supports External API to generate text,image,video based response.	
+   
 	5) User DashBoard:
  	  Visual and Textual Representation of the Data.
+    
    Admin: 
    	1) Authentication through SpringSecurity :
     	    Email And Password Based Authentication For Spring Security.
