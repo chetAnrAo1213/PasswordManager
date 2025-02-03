@@ -51,3 +51,6 @@ _______________________________________________
         
 	5) AI Based User Analysis :
  	     Admin can By-Pass the data of the User to AI, it will  Fetch an Analysis Report.
+       
+ Encyrption : Visit this playlist from YouTube. It has a tutorial on How to apply Symmentric Encryption against a text.
+           
