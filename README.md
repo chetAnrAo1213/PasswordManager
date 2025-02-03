@@ -18,7 +18,7 @@ _______________________________________________
 
 # Project Overview : 
 
-  User: 
+  User : 
   
   	1) Complete Authentication for the user :
    	  Password, Pin, Questions based Authentication, Mail Verification, Reset Password.
@@ -35,7 +35,7 @@ _______________________________________________
 	5) User DashBoard:
  	  Visual and Textual Representation of the Data.
         
-   Admin:
+   Admin :
    
    	1) Authentication through SpringSecurity :
     	    Email And Password Based Authentication For Spring Security.
@@ -52,5 +52,7 @@ _______________________________________________
 	5) AI Based User Analysis :
  	     Admin can By-Pass the data of the User to AI, it will  Fetch an Analysis Report.
        
- Encyrption : Visit this playlist from YouTube. It has a tutorial on How to apply Symmentric Encryption against a text.
-           
+ Encyrption : 
+ 		
+   		Visit this playlist from YouTube. It has a tutorial on How to apply Symmentric Encryption against a text.
+           	Link : https://youtube.com/playlist?list=PLtgomJ95NvbPDMQClkBZPijLdEFyo0VHa&feature=shared
