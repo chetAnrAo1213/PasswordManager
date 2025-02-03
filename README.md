@@ -28,10 +28,10 @@ _______________________________________________
 
 	3) AI Support :
 	  Meta AI via Groq Cloud AI-API to use Chat Bot and Security.	
-   
+
         4) External API: 
 	  Supports External API to generate text,image,video based response.	
-   
+
 	5) User DashBoard:
  	  Visual and Textual Representation of the Data.
         
