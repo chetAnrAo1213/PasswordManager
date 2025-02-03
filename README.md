@@ -23,8 +23,8 @@ _______________________________________________
   	1) Complete Authentication for the user :
    	  Password, Pin, Questions based Authentication, Mail Verification, Reset Password.
         
-	2) Storing of Passwords :
- 	  Add, Delete, Update, View, Decrypt a password. And also create a note.
+	2) Crud Operations on Passwords :
+ 	  Add, Delete, Update, View, Decrypt a password. And also a personal note.
         
 	3) AI Support :
 	  Meta AI via Groq Cloud AI-API to use Chat Bot and Security.	
