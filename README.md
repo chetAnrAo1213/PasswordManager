@@ -1,5 +1,5 @@
 # PasswordManager
-Password Manager is a tool for storing and managing passwords. The Project consists of two modules User & Admin. It provides complete user authentication and authorization, ensuring security to the passwords. The project also supports Crud Operations against a password. User can try various Password Recovery Mechanisms like SignIn with Questions,Pin or Reset the account password. User module is intergrated AI to provide a Chat Bot and Security for External Api's with visual dashboard. Admin can have write access against a user including privacy policy, and also visual dashboard. 
+Password Manager is a tool for storing and managing passwords. The Project consists of two modules User & Admin. It provides complete user authentication and authorization, ensuring security to the passwords. The project also supports Crud Operations against a password. User can try various Password Recovery Mechanisms like SignIn with Questions,Pin or Reset the account password. User module is intergrated AI to provide a Chat Bot and Security for External Api's with visual dashboard. Admin can have read/write access against a user including privacy policy, and also visual dashboard. Overall a Basic SpringBoot Project that Supports extensive Crud Operations and Supports Thrid Party API's.
 ________________________________________________
 
 # Project Configuration
