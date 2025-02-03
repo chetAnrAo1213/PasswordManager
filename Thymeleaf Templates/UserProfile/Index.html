@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - Profile</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<style>
+html {
+			scrollbar-width: thin;
+			scrollbar-color: #b2967d #f3e5f5 !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+		body {
+    background-color: #1d1f20 !important; 
+    color: #d1d1d1  !important; 
+}
+
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+    height: 8px;
+}
+
+.trend-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}		
+	</style>
+</head>
+<body>
+	<nav th:replace="~{NavBar}"></nav>
+	<div class="container py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">User Overview</h4>
+        
+    </div>
+ <p></p>
+    <!-- Statistics Cards -->
+    <div class="row g-4">
+   <div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <h5 class="text-muted mb-2">Registration Details</h5>
+            </div>
+            <hr>
+            <div class="text-dark">
+                <h6>
+                    Mr/Ms : <span th:text="${FirstName != null ? FirstName : 'No info available'}"></span>.
+                </h6>
+                <h6>
+                    Registration Id : <span th:text="${RegistrationId != null ? RegistrationId : 'No info available'}"></span> (By PasswordManager)
+                </h6>
+                <h6>
+                    Access : <span th:text="${Access != null ? Access : 'No info available'}"></span>.
+                </h6>
+                <h6>
+                    Role: <span th:text="${Role != null ? Role : 'No info available'}"></span>.
+                </h6>
+                <h6>
+                    Note Id: <span th:text="${noteId != null ? noteId : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    ChatBot Access : <span th:text="${ChatBotAccess != null ? ChatBotAccess : 'No info available'}"></span>.
+                </h6>
+            </div>
+            <!-- Display an error message if no registration id is found -->
+            <h6 th:unless="${RegistrationId != null}" class="text-danger">No Data found.</h6>
+        </div>
+    </div>
+</div>
+
+        <div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4"> 
+                    <i class="fas fa-user"></i>
+                </div>
+                <h5 class="text-muted mb-2">User Details</h5>
+            </div>
+            <hr>
+            <div class="text-dark">
+                <h6>
+                    Full Name: <span th:text="${FirstName != null ? FirstName : 'No info available'}"></span> 
+                    <span th:text="${LastName != null ? LastName : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    Email Id: <span th:text="${Email != null ? Email : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    Phone No: <span th:text="${Phone != null ? Phone : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    Password: <span th:text="${Password != null ? Password : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    User Pin: <span th:text="${Pin != null ? Pin : 'No info available'}"></span>
+                </h6>
+                <h6>
+                    Questions: True
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      
+         <div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h5 class="text-muted mb-2">User Security Questions</h5>
+            </div>
+            <hr>
+            <h6>
+                Question 1: <span th:text="${FirstName != null ? FirstName : 'User'}"></span>'s First School
+            </h6>
+            <h6>
+                Answer 1: <span th:text="${FQ != null ? FQ : 'No security question available'}"></span>
+            </h6>
+            <h6>
+                Question 2: <span th:text="${FirstName != null ? FirstName : 'User'}"></span>'s Favorite Color
+            </h6>
+            <h6>
+                Answer 2: <span th:text="${SQ != null ? SQ : 'No security question available'}"></span>
+            </h6>
+            <h6>
+                Question 3: <span th:text="${FirstName != null ? FirstName : 'User'}"></span>'s Favorite Movie
+            </h6>
+            <h6>
+                Answer 3: <span th:text="${TQ != null ? TQ : 'No security question available'}"></span>
+            </h6>
+        </div>
+    </div>
+</div>
+
+          <div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h5 class="text-muted mb-2">User Note</h5>
+            </div>
+            <hr>
+
+            <!-- Check if noteId exists -->
+            <div th:if="${noteId != null}" class="text-dark">
+                <h6>Note Id: <span th:text="${noteId != null ? noteId : 'No info available'}"></span></h6>
+                <h6>Note Title: <span th:text="${noteTI != null ? noteTI : 'No info available'}"></span></h6>
+                <h6>Note Tags: <span th:text="${noteTA != null ? noteTA : 'No info available'}"></span></h6>
+                <h6>Created Date: <span th:text="${noteCR != null ? noteCR : 'No info available'}"></span></h6>
+                <h6>Note Content: <span th:text="${noteCO != null ? noteCO : 'No info available'}"></span></h6>
+                <h6>Modified Date: <span th:text="${noteLD != null ? noteLD : 'No info available'}"></span></h6>
+            </div>
+
+            <!-- If note is not found, show message -->
+            <h6 th:if="${note == 'No Note Found'}" class="text-danger">No Data found.</h6>
+        </div>
+    </div>
+</div>
+
+        
+    </div>
+</div>
+       
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

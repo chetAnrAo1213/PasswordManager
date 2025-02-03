@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - Pexel Video</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
+	<style type="text/css">
+		body {
+			background-color: #f5deb3 !important;
+			/* Wheat yellow */
+			color: #3e2723 !important;
+			/* Dark brown */
+			scrollbar-width: thin !important;
+			/* Thin scrollbar for Firefox */
+			scrollbar-color: #8d6e63 #f5deb3 !important;
+		}
+
+
+
+
+		.search-card {
+			background-color: #f7ccc8 !important;
+			/* Soft taupe */
+			color: #3e2723 !important;
+			border-radius: 8px !important;
+			padding: 20px;
+			border: 1px solid #b5a59d;
+			/* Sandy brown */
+		}
+
+		.search-btn {
+			background-color: #bcaaa4 !important;
+			/* Muted brown */
+			color: #ffffff;
+			border: 1px solid #bcaaa4;
+			border-radius: 5px;
+			padding: 8px 16px;
+			transition: all 0.3s ease;
+		}
+
+		.search-btn:hover {
+			background-color: #8d6e63 !important;
+			color: #ffffff !important;
+			border: 1px solid #8d6e63 !important;
+		}
+
+		.ast-card {
+			background-color: #a1887f !important;
+			/* Earthy brown */
+			border-radius: 0px !important;
+			overflow: hidden !important;
+			margin-bottom: 20px !important;
+		}
+	
+		.ast-card .card-body {
+			background-color: #fff8e1 !important;
+			/* Soft cream */
+			color: #3e2723 !important;
+			padding: 20px !important;
+			line-height: 1.6 !important;
+		}
+
+		html {
+			scrollbar-width: thin;
+			scrollbar-color: #8d6e63 #f7ccc8 !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+.activity-timeline {
+    position: relative;
+}
+
+.activity-item {
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.activity-item {
+    background-color: #f8f9fa;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.activity-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.activity-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.custom-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://www.drupal.org/files/project-images/pexels_logo_0.png');
+    background-size: cover;
+}
+
+.ai-icon
+{
+   display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://cdn-avatars.huggingface.co/v1/production/uploads/1673913216963-63115d7864939fabc00f0b45.png');
+    background-size: cover;         
+}
+
+
+.bg-success-soft {
+    background-color: #d1e7dd;
+}
+
+.bg-danger-soft {
+    background-color: #f8d7da;
+}
+
+.bg-warning-soft {
+    background-color: #fff3cd;
+}
+
+.bg-info-soft {
+    background-color: #cff4fc;
+}
+.alert-custom {
+    background-color: #f8d7da !important; /* Lightest red (soft pinkish red) */
+    color: #721c24 !important; /* Deep red text for contrast */
+    border-color: #f5c6cb !important; /* Soft red border */
+}
+	</style>
+
+
+
+</head>
+<script>
+        // Auto-dismiss the alert after 3 seconds
+        setTimeout(() => {
+            const alertElement = document.querySelector('.alert-custom');
+            if (alertElement) {
+                alertElement.classList.remove('show'); // Visually hide the alert
+                alertElement.classList.add('fade');   // Apply fade transition
+                setTimeout(() => alertElement.remove(), 200); // Remove element after fade
+            }
+        }, 4000);
+    </script>
+<body>
+
+	<nav th:replace="~{NavBar}"></nav>
+<div class="container mt-3">
+        <div th:if="${notificationMessage != null}" 
+             class="alert alert-custom alert-dismissible fade show" 
+             role="alert">
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+            <span th:text="${notificationMessage}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+	<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 ">
+        <h4 class="mb-0">API Overview</h4>
+    </div>
+
+    <div class="row g-4">  
+     <div class="row mt-4">
+        <div class="col-12">
+            <div class="card ast-card" style="border-radius:0px;">
+                <div class="card-body border-0">
+                    <div class="d-flex justify-content-between align-items-center mb-4 ">
+                        <h5 class="card-title mb-0">Pexels : Video Library</h5> 
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="activity-item bg-transparent"style="border-radius:0px;">
+                                <div class="d-flex gap-3">
+                                    <div class="activity-icon bg-warning-soft text-warning">
+                                        <i class="custom-icon"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+											<div
+												class="d-flex justify-content-between align-items-center mb-2">
+												<h6 class="mb-0">External API</h6>
+												<span class="activity-date">Fair Usage</span>
+											</div>
+											<p class="text-muted mb-2">We Will Make A Request Call
+												Based On Your Query To Pexels</p>
+											<div class="d-flex align-items-center">
+												<span class="text-warning small me-3"> <i
+													class="fas fa-exclamation-triangle me-2 "></i>Repetitive Response
+												</span> <span class="text-info small me-3"> <i
+													class="fas fa-info-circle me-2"></i>Key Word Based Search
+												</span> <span class="text-danger small me-3"> <i
+													class="fas fa-exclamation-triangle me-2"></i>AI Bypass
+												</span> <span class="text-dark small me-3"> <i
+													class="fas fa-check-circle text-dark"></i> Video Response
+												</span>
+ <span class="text-danger small me-3"> <i class="fas fa-exclamation-triangle me-2 "></i>Internet Connection Required</span>
+											</div>
+										</div>
+                                    
+                                    
+                                </div><hr>
+                                <div
+										class="list-group-item border-0 d-flex align-items-center px-0 bg-transparent">
+										<div class="activity-icon bg-warning-soft p-2 me-3 ">
+											<i class="ai-icon"></i>
+
+										</div>
+										<div class="flex-grow-1 ">
+											<h6 class="mb-1">
+												AI Filter <small class="me-7 text-muted">By Groq</small>
+											</h6>
+
+											<p class="text-muted small mb-0 ">
+												The Search Query Will Undergo Through an AI filter i.e We
+												Will Pass Your Search Query To AI To Check Whether Your
+												Query Is Non-Abusive or Not. <br>Any Abusive Word Or
+												In-Appropraite Words Will Be Rejected, If Your Query Passes
+												The Security Filter Then We Will Bypass Your Search Key To
+												Get Videos And Its Details. You Can Also Download The Video Content.
+											</p>
+										</div>
+
+									</div>
+                            </div>
+					   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container mt-4 mb-4">
+		<div class="card search-card">
+			<div class="search-card-body">
+				<form th:action="@{/api/videos}" th:method="post">
+					<div class="row">
+						<div class="col-md-6 " style="border-right: 1px solid #fff;">
+							<h5 class="card-title mb-4">Search Videos through Keywords:</h5>
+							<input type="text" required class="form-control" name="search"
+								placeholder="Enter search term">
+							<button type="submit" class="btn btn-outline-dark w-50 mt-3 search-btn ">Search</button>
+						</div>
+						<div class="col-md-6">
+							<div class="alert alert-warning d-flex align-items-center" role="alert">
+							<p></p><p></p>
+								<i class="bi bi-exclamation-circle-fill flex-shrink-0 me-2"
+									style="font-size: 1.5rem; color: #7f4b2a;"></i>
+								<div>
+									Do understand that this API works on a hourly bases
+									we won't <br>limit you but don't use too much.
+									<code style="background-color: #3e2723 !important;color: #fff8e1 !important; padding:2px; border-radius:5px;">
+									Sometimes Pexels May not Respond to the Current Request</code>.
+									Do understand we're just a platform between you and External Services. 
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				<p></p>
+				<p></p>
+				<div th:if="${videosError != null}"><i class="fas fa-exclamation-triangle text-danger"></i> <span class="card ast-card" th:text="${videosError}"></span> </div>
+			
+				<div class="container">
+					<div class="row">
+						<div th:each="article : ${videos}" class="col-12">
+							<div class="card ast-card">
+								<div class="card-body">
+									<h6>Pexel UserId : <span th:text="${article.pexelUserId}"></span></h6>
+									<h6>Pexel User Name : <span th:text="${article.pexelUsername}"></span></h6>
+									<h6>Pexel User Account : <a th:href="${article.pexelUserurl}" target="_blank"
+											th:text="${article.pexelUserurl}">Visit</a></h6>
+									<h6>Pexel File Id : <span
+											th:text="${article.pexelVideoid} ?: 'No information available'"></span></h6>
+									<h6>Pexel File Type : <span th:text="${article.pexelVideofiletype}"></span> </h6>
+									<h6>Pexel Video Link : <a th:href="${article.pexelVideolink}" target="_blank"
+											th:text="${article.pexelVideolink}"></a> </h6>
+									<p>Video Display :</p>
+									<video controls width="600">
+										<source th:src="${article.pexelVideolink}" type="video/mp4">
+									</video>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+				
+<div class="bsb-service-7 py-5 py-xl-8">
+  <div class="container">
+    <div class="row">
+      <div class="col-19">
+        <div class="container-fluid bg-dark shadow">
+          <div class="row">
+            <div class="col-12 col-md-6 p-0" style="background-color: #8d6e63 !important; color: #f5e1b3 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5 border-right">
+                  <h5 class="fw-light text-light text-uppercase mb-4">How Do you get videos?</h5>
+                  <p id="ques" class="mb-4 text-light">The API will fetch the videos according to you search query and based on that it will fetch the latest 
+                  videos from their system like account details, search video, URLs. However, 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:3px; border-radius:5px;">
+                  User should only use keywords</code> like nature, because that's how this particular API work and also you can download them.
+                  </p></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 p-0" style="background-color: #8d6e63 !important; color: #f5e1b3 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5">
+                  <h5 class="fw-light text-uppercase mb-4 text-light">Fair Usage Warning!</h5>
+                  <p id="ques" class="mb-4 text-light">Your search query will get bypass from our system. 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:2px; border-radius:5px;">We use AI to check</code> whether your search query is 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:2px; border-radius:5px;">appropriate</code> or not.
+                  Any Abusive words or Foul Language in search query will be rejected by our system. Use wisely</p>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

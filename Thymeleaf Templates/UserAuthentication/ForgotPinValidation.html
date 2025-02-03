@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Password Manager - PIN Validation</title>
+	<link th:replace="~{Resources}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<style>
+	body {
+		background-image: url('https://res.cloudinary.com/dbulfrlrz/images/f_auto,q_auto/v1707559415/wp-pme/What-is-password-fatigue_-blog@2x/What-is-password-fatigue_-blog@2x.?_i=AA');
+		background-size: cover;
+		background-position: center;
+		margin: 0;
+		position: relative;
+		height: 100vh;
+	}
+
+	.d1 {
+		display: flex;
+		justify-content: flex-start;
+		padding-left: 40px;
+		padding-top: 60px;
+	}
+
+	.container {
+		max-width: 450px;
+		width: 100%;
+		margin: 0;
+	}
+
+	.card {
+		width: 100%;
+	}
+
+	h1 {
+		background: -webkit-linear-gradient(90deg, #f0b87d, #b2dbd6, #98ebbc);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin: 0;
+		font-size: 100px;
+		font-weight: 500;
+		-webkit-text-stroke: 0.7px rgba(0, 0, 0, 0.1);
+	}
+ 
+	h1::before {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		color: rgba(0, 0, 0, 0.1);
+		-webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+	}
+
+	.si {
+		font-size: 24px;
+		margin: 0;
+		color: white;
+	}
+	
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+</style>
+
+<body>
+<nav class="navbar navbar-expand-lg mb-4">
+		<div class="container-fluid">
+			<a class="navbar-brand">Password Manager</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="nav-link "  aria-expanded="false">Pin Validation</a>
+		</div>
+	</nav>
+	<div class="d1">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+						<article class="card-body">
+							<h4 class="text-center card-title mb-4 mt-1">Password Manager</h4>
+							<h6 class="card-title mb-4 mt-1"> Forgot Password: Access Through Pin</h6>
+							<hr>
+							<p></p>
+							<form th:action="@{/AuthenticationQuestions/validateUserFromPin}" th:method="post">
+
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>Enter Mail Id :</label>
+										<input required class="form-control" placeholder="Registered Mail Id"
+											type="email" name="email">
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>Enter Security Pin :</label>
+										<input required class="form-control" placeholder="* * * *" type="number"
+											name="pin">
+									</div>
+								</div>
+
+
+
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block">Log In</button>
+								</div>
+							</form>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<p></p>
+	<p></p>
+	
+</body>
+
+</html>

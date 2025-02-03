@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Custom Navbar</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<style>
+		.navbar {
+			background-color: #0b2c3d !important;
+			color: #b69a53 !important;
+			/* Brighter gold */
+		}
+
+		.navbar a {
+			color: #b69a53 !important;
+			/* Brighter gold */
+		}
+
+		.navbar a:hover {
+			color: #fff !important;
+		}
+
+
+	</style>
+</head>
+
+<body>
+	<div class="d1">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/PasswordManager/Admin/AdminHome}">Password Manager</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/PasswordManager/Admin/UserSpecifics/getLists}">Specific Details</a></li>
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/PasswordManager/Admin/DeleteUser}">Delete User</a></li>
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/PasswordManager/Admin/UserReportAI}">AI Analysis</a></li>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/PasswordManager/Admin/logout}">LogOut</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+	
+
+</body>
+
+</html>

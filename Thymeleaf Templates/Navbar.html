@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Custom Navbar</title>
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Bootstrap Bundle JS (with Popper.js) -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+	/* Brighter gold */
+}
+
+.navbar a {
+	color: #b69a53 !important;
+	/* Brighter gold */
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+
+/* Add */
+.add .modal-content {
+	background-color: #d0f0c0;
+	color: #4d5d53;
+}
+
+.add .modal-header, .add .modal-footer {
+	border-color: #8a9a5b;
+}
+
+.add .btn-outline-warning {
+	border-color: #f1c232;
+	color: #f1c232;
+}
+
+.add .btn-outline-warning:hover {
+	background-color: #f1c232;
+	color: #fff;
+}
+
+.add .btn-outline-success {
+	border-color: #6fa96f;
+	color: #6fa96f;
+}
+
+.add .btn-outline-success:hover {
+	background-color: #6fa96f;
+	color: #fff;
+}
+
+/* Get */
+.get .modal-content {
+	background-color: #f0f0f0;
+	color: #333333;
+}
+
+.get .modal-header, .get .modal-footer {
+	border-color: #888888;
+}
+
+.get .btn-outline-warning {
+	border-color: #ff9800;
+	color: #ff9800;
+}
+
+.get .btn-outline-warning:hover {
+	background-color: #ff9800;
+	color: #fff;
+}
+
+.get .btn-outline-success {
+	border-color: #4caf50;
+	color: #4caf50;
+}
+
+.get .btn-outline-success:hover {
+	background-color: #4caf50;
+	color: #fff;
+}
+
+/* Update */
+.update .modal-content {
+	background-color: #e0f7fa;
+	color: #01579b;
+}
+
+.update .modal-header, .update .modal-footer {
+	border-color: #0288d1;
+}
+
+.update .btn-outline-warning {
+	border-color: #ffab00;
+	color: #ffab00;
+}
+
+.update .btn-outline-warning:hover {
+	background-color: #ffab00;
+	color: #fff;
+}
+
+.update .btn-outline-success {
+	border-color: #26a69a;
+	color: #26a69a;
+}
+
+.update .btn-outline-success:hover {
+	background-color: #26a69a;
+	color: #fff;
+}
+
+/* Delete */
+.del .modal-content {
+	background-color: #ffe5d9;
+	color: #d9381e;
+}
+
+.del .modal-header, .del .modal-footer {
+	border-color: #ff7043;
+}
+
+.del .btn-outline-warning {
+	border-color: #ff5722;
+	color: #ff5722;
+}
+
+.del .btn-outline-warning:hover {
+	background-color: #ff5722;
+	color: #fff;
+}
+
+.del .btn-outline-success {
+	border-color: #43a047;
+	color: #43a047;
+}
+
+.del .btn-outline-success:hover {
+	background-color: #43a047;
+	color: #fff;
+}
+
+.note:hover {
+	background-color: #815d9c !important;
+}
+
+.chatbot:hover {
+	background-color: #f78181 !important;
+}
+
+.pexel:hover {
+	background-color: #fac77a !important;
+}
+
+.news:hover {
+	background-color: #bf8867 !important;
+}
+
+.apod:hover {
+	background-color: #304075 !important;
+}
+</style>
+</head>
+
+<body>
+	<div class="d1">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/PasswordManager/home}">Password Manager</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+							<div class="navbar-nav">
+
+								<div class="nav-item dropdown me-2 ">
+									<a class="nav-link dropdown-toggle btn btn-dark btn-sm me-2" id="passwordDropdown"
+										role="button" data-bs-toggle="dropdown" aria-expanded="false">Passwords</a>
+									<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="passwordDropdown">
+										<li> <a class="nav-link btn btn-outline-success btn-sm  text-center"
+												data-bs-toggle="modal" data-bs-target="#addModal" type="button"> Add
+												Password</a></li>
+										<li> <a class="nav-link btn btn-outline-info btn-sm  text-center"
+												data-bs-toggle="modal" data-bs-target="#updateModal" type="button">
+												Update Password</a></li>
+										<li> <a class="nav-link btn btn-outline-secondary btn-sm  text-center"
+												data-bs-toggle="modal" data-bs-target="#getModal" type="button"> View
+												Passwords</a></li>
+										<li> <a class="nav-link btn btn-outline-danger btn-sm  text-center"
+												data-bs-toggle="modal" data-bs-target="#deletedModal" type="button">
+												Delete Password</a></li>
+										<li> <a class="nav-link btn btn-outline-dark btn-sm  text-center" type="button"
+												th:href="@{/UserPasswords/DecryptionPassword}"> Decrypt Password </a>
+										</li>
+									</ul>
+								</div>
+
+								<div class="nav-item dropdown me-2">
+									<a class="nav-link dropdown-toggle btn btn-dark btn-sm me-2" id="featuresDropdown"
+										role="button" data-bs-toggle="dropdown" aria-expanded="false">Features</a>
+									<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="featuresDropdown">
+										<li><a class="nav-link btn btn-outline-dark btn-sm  chatbot text-center"
+												type="button" th:href="@{/PasswordManager/ChatBot}">Chat Bot</a></li>
+										<li><a class="nav-link btn btn-outline-dark btn-sm  note text-center"
+												type="button" th:href="@{/PasswordManager/Note}">Note</a></li>
+									</ul>
+								</div>
+
+								<div class="nav-item dropdown ms-auto me-2">
+									<a class="nav-link dropdown-toggle btn btn-dark btn-sm me-2" id="featuresDropdown"
+										role="button" data-bs-toggle="dropdown" aria-expanded="false">Public APIs</a>
+									<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="featuresDropdown">
+										<li><a class="nav-link btn btn-outline-dark btn-sm  news text-center"
+												type="button" th:href="@{/PasswordManager/News}">News</a></li>
+										<li><a class="nav-link btn btn-outline-dark btn-sm  apod text-center"
+												type="button" th:href="@{/PasswordManager/NASAAPOD}">A-POD</a></li>
+										<li><a class="nav-link btn btn-outline-dark btn-sm  pexel text-center"
+												type="button"  th:href="@{/PasswordManager/PexelVideo}">Pexel Videos</a>
+										</li>
+									</ul>
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="navbar-nav ms-auto">
+					<div class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle btn btn-dark btn-sm me-2" id="profileDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">Details</a>
+						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+							aria-labelledby="profileDropdown">
+							<li><a class="dropdown-item btn btn-outline-dark text-center" th:href="@{/PasswordManager/Profile}">Profile</a></li>
+							<li><a class="dropdown-item btn btn-outline-dark text-center" th:href="@{/PasswordManager/ApiUsage}">API Usage</a></li>
+							<li><a class="dropdown-item btn btn-outline-dark text-center" th:href="@{/PasswordManager/logout}">LogOut</a></li>
+						</ul>
+					</div>
+				</div>
+</div>
+		</nav>
+	</div>
+
+	<!-- Add Password Modal -->
+	<div class="add">
+		<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form th:action="@{/UserPasswords/checkPinForAddPasswords}" th:method="post">
+						<div class="modal-header">
+							<h6 class="modal-title" id="exampleModalLabel">To Add Password:</h6>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group col-md-6">
+								<h6>Your Account Security Pin:</h6>
+								<input required name="addpin" class="form-control" type="text" placeholder="****">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-outline-success">Validate</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Update Password Modal -->
+	<div class="update">
+		<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form th:action="@{/UserPasswords/checkPinForUpdatePasswords}" th:method="post">
+						<div class="modal-header">
+							<h6 class="modal-title" id="exampleModalLabel">To Update Passwords:</h6>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group col-md-6">
+								<h6>Your Account Security Pin:</h6>
+								<input required name="updatepin" class="form-control" type="text" placeholder="****">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-outline-info">Validate</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Get Modal -->
+	<div class="get">
+		<div class="modal fade" id="getModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form th:action="@{/UserPasswords/checkPinForGetPasswords}" th:method="post">
+						<div class="modal-header">
+							<h6 class="modal-title" id="exampleModalLabel">To View Password:</h6>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group col-md-6">
+								<h6>Your Account Security Pin:</h6>
+								<input required name="getpin" class="form-control" type="text" placeholder="****">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-outline-secondary">Validate</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- delete Password Modal -->
+	<div class="del">
+		<div class="modal fade" id="deletedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title" id="exampleModalLabel">To Delete Password :</h6>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div>
+					<form th:action="@{/UserPasswords/checkPinFordeletePasswords}" th:method="post">
+						<div class="modal-body">
+
+							<div class="form-group col-md-6">
+								<h6>Your Account Security Pin : </h6>
+								<input required name="deletepin" class="form-control" type="text" placeholder="****">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-outline-danger">Validate</button>
+						</div>
+						</form>
+				</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Password Manager - Admin SignIn</title>
+	<link th:replace="~{Resources}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+		rel="stylesheet">
+	<style>
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #0b2c3d #b69a53 !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.main {
+	background-color: #343434;
+	color: #F8F8FF;
+}
+.alert-custom {
+            background-color: #d4edda !important; /* Light green */
+            color: #155724 !important; /* Dark green text */
+            border-color: #c3e6cb !important; /* Green border */
+        }
+</style>
+
+</head>
+<script>
+        setTimeout(() => {
+            const alertElement = document.querySelector('.alert');
+            if (alertElement) {
+                alertElement.classList.remove('show'); 
+                alertElement.classList.add('fade');   
+                setTimeout(() => alertElement.remove(), 300); 
+            }
+        }, 2500);
+</script>
+<body class="main">
+
+
+
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" >Password Manager</a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a class="nav-link" >Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+    <div th:if="${notificationMessage != null}" 
+         class="alert alert-custom alert-dismissible fade show" 
+         role="alert">
+      <i class="bi bi-info-circle-fill"></i>
+      <span th:text="${notificationMessage}"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+		<div class="container">
+			<br>
+			<p>Click Here if you dont have an <a th:href="@{/PasswordManager/Admin/AdminRegister}">Account</a></p>
+			<div class="row ">
+				<hr>
+			<div class="card rounded-0" style="background-color:#000;color:#F8F8FF;">
+				<article class="card-body ">
+					<h4 class="text-center card-title mb-4 mt-1">Password Manager</h4>
+					<h6 class="card-title mb-4 mt-1">Sign In: Admin</h6>
+					<hr>
+					<p></p>            
+					<form th:action="@{/PasswordManager/Admin/Authentication/AdminLogin}" th:method="post">
+						<div class="form-group">
+							<h6>Your Email :</h6> 
+							<input required name="email" class="form-control" placeholder="Email" type="email">
+						</div>
+						<p></p>
+						<div class="form-group">
+							<h6>Your Password :</h6> 
+							<input required class="form-control" placeholder="******" type="password" name="password">
+						</div>
+						<div class="form-group text-center">
+							<p></p>
+							<p></p>
+							<button type="submit" class="btn btn-outline-primary btn-block">Login</button>
+						</div>
+						<br>
+				</form>
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<p></p>
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

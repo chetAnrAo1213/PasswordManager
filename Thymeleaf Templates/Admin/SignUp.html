@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Password Manager - Admin SignUp</title>
+	<link th:replace="~{Resources}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #0b2c3d #b69a53 !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+.main
+{
+background-color:#343434;color:#F8F8FF;
+}
+</style>
+<script>
+		function checkPasswords() {
+			var password = document.querySelector('input[name="Apassword"]').value;
+			var confirmPassword = document
+				.querySelector('input[name="ACpassword"]').value;
+			var message = document.getElementById('passwordMessage');
+
+			if (password === confirmPassword) {
+				message.style.color = '';
+				message.textContent = '';
+			} else {
+				message.style.color = 'red';
+				message.textContent = 'Passwords Do Not Matched';
+			}
+		}
+
+		function showpassword() {
+
+			var passwordField = document.getElementById("password");
+			var confirmPasswordField = document.getElementById("cpassword");
+			var pinField = document.getElementById("pin");
+			var confirmPinField = document.getElementById("cpin");
+
+			var fields = [passwordField, confirmPasswordField, pinField,
+				confirmPinField];
+			fields.forEach(function (field) {
+				if (field.type === "password") {
+					field.type = "text";
+				} else {
+					field.type = "password";
+				}
+			});
+		}
+	</script>
+
+<body class="main">
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" >Password Manager</a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a class="nav-link" >Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+	
+	<div class="d1">
+		<div class="container">
+			<br>
+			<p>Click Here if you Have an <a th:href="@{/PasswordManager/Admin/AdminSignIn}">Account</a></p>
+			<div class="row">
+				<hr>
+				<div class="col-sm-14">
+					<div class="card rounded-0" style="background-color:#000;color:#F8F8FF;">
+						<article class="card-body">
+							<h4 class="card-title text-center mb-4 mt-1">Password Manager</h4>
+							<form th:action="@{/PasswordManager/Admin/Authentication/saveAdminInfo}" th:method="post">
+								<h6>Sign Up: Admin</h6>
+								<p></p>
+								<p></p>
+								<hr>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>First Name</label>
+										<input required name="Afname" class="form-control" placeholder="John" type="text">
+									</div>
+									<div class="form-group col-md-6">
+										<label>Last Name</label>
+										<input required name="Alname" class="form-control" placeholder="Doe" type="text">
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>Your email</label>
+										<input required name="Aemail" class="form-control" placeholder="johnDoe@email.com" type="email" th:value="${MailId}">
+									</div>
+									<div class="form-group col-md-6">
+										<label>Phone Number</label>
+										<input required name="Aphone" class="form-control" placeholder="+91" type="number">
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>Your password</label>
+										<input required class="form-control" placeholder="******" type="password"
+											name="Apassword" oninput="checkPasswords()" id="password">
+									</div>
+									<div class="form-group col-md-6">
+										<label>Confirm password</label>
+										<input required class="form-control" placeholder="******" type="password"
+											name="ACpassword" oninput="checkPasswords()" id="cpassword">
+									</div>
+								</div>
+							
+								<p> Show Passwords <input type="checkbox" onclick="showpassword()"></p>
+								<div id="passwordMessage"></div>
+
+								<div class="form-group">
+									<button type="submit" class="btn btn-outline-primary btn-block">Register Details</button>
+								</div>
+							</form>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<p></p>
+	<p></p>
+
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

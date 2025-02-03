@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Manager - ApiUsage</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #b2967d #f3e5f5 !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+
+.main
+{
+   background-color: #000;
+   color:#fff;
+}
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+    height: 8px;
+}
+
+.trend-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+</style>
+</head>
+<body class="main">
+	<nav th:replace="~{NavBar}"></nav>
+	<p></p>
+	<p></p>
+	<div class="container py-4">
+
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h4 class="mb-0">API Overview</h4>
+
+		</div>
+		<p></p>
+
+		<div class="row g-4">
+
+			<!-- Orders Card -->
+			<div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h5 class="text-muted mb-2">User Request Calls</h5>
+            </div>
+            <hr>
+            <div class="text-dark">
+                <h6>Mail Id: <span th:text="${RegName != null and #strings.length(RegName) > 0 ? RegName : 'No info available'}"></span></h6>
+                <h6>Registration Id: <span th:text="${RegID != null and #strings.length(RegID) > 0 ? RegID : 'No info available'}"></span></h6>
+                <h6>Pexels API Calls: <span th:text="${pexelCalls != null ? pexelCalls : 'No info available'}"></span></h6>
+                <h6>Apod Request Calls: <span th:text="${apodCalls != null ? apodCalls : 'No info available'}"></span></h6>
+                <h6>News Request Calls: <span th:text="${NewsTimeRequests != null ? NewsTimeRequests : 'No info available'}"></span></h6>
+                <h6>News Last Request Time: <span th:text="${NewsTimeCurrent != null and #strings.length(NewsTimeCurrent) > 0 ? NewsTimeCurrent : 'No info available'}"></span></h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+			<!-- Revenue Card -->
+			<div class="col-12 col-md-9 col-lg-6">
+    <div class="card stat-card border-0 shadow-lg">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+                <h5 class="text-muted mb-2">User API Calls</h5>
+            </div>
+            <hr>
+
+            <div class="text-dark">
+                <h6>Mail Id: 
+                    <span th:text="${RegName != null and #strings.length(RegName) > 0 ? RegName : 'No info available'}"></span>
+                </h6>
+                <h6>Registration Id: 
+                    <span th:text="${RegID != null and #strings.length(RegID) > 0 ? RegID : 'No info available'}"></span>
+                </h6>
+                <h6>News Last Request Search Key: 
+                    <span th:text="${NewsKey != null and #strings.length(NewsKey) > 0 ? NewsKey : 'No info available'}"></span>
+                </h6>
+                <h6>News Next Request Time: 
+                    <span th:text="${NewsTimeNext != null and #strings.length(NewsTimeNext) > 0 ? NewsTimeNext : 'No info available'}"></span>
+                </h6>
+                <h6>Pexels Key + Time Stamp: 
+                    <span th:text="${pexelKey != null and #strings.length(pexelKey) > 0 ? pexelKey : 'No info available'}"></span>
+                </h6>
+                <h6>APOD Last Used Time: 
+                    <span th:text="${apodKey != null and #strings.length(apodKey) > 0 ? apodKey : 'No info available'}"></span>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="bsb-service-7 py-5 py-xl-8 bg-dark " >
+  <div class="container border-0">
+    <div class="row justify-content-md-center text-light">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+        <h3 class="fs-5 mb-2 text-center text-uppercase">Visual Report</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="row">
+      <div class="col-19">
+        <div class="container-fluid  shadow">
+          <div class="row enc">
+            <div class="col-12 col-md-6 p-0 " >
+              <div class="card border-0 bg-light" style="border-radius:0px;">
+                <div class=" text-center p-5 border-right">
+                  <h5 class="fw-light  text-uppercase mb-4">Bar Chart</h5>
+                  <canvas id="apiUsageBarChart" style="height: 400px; width: 100%;"></canvas>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 p-0">
+              <div class="card border-0 bg-light" style="border-radius:0px;">
+                <div class=" text-center p-5">
+                <h5 class="fw-light  text-uppercase mb-4">Line Chart</h5>
+                  <canvas id="apiUsageLineChart" style="height: 400px; width: 100%;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<script th:inline="javascript">
+    // Ensure values are numbers and not null/undefined
+    var newsRequests = Number(/*[[${NewsTimeRequests != null ? NewsTimeRequests : 0}]]*/ 0);
+    var apodRequests = Number(/*[[${apodCalls != null ? apodCalls : 0}]]*/ 0);
+    var pexelsRequests = Number(/*[[${pexelCalls != null ? pexelCalls : 0}]]*/ 0);
+
+    // Handle potential NaN values (if conversion fails)
+    if (isNaN(newsRequests)) newsRequests = 0;
+    if (isNaN(apodRequests)) apodRequests = 0;
+    if (isNaN(pexelsRequests)) pexelsRequests = 0;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("News API Requests:", newsRequests);
+        console.log("APOD API Requests:", apodRequests);
+        console.log("Pexels API Requests:", pexelsRequests);
+
+        var maxRequests = Math.max(newsRequests, apodRequests, pexelsRequests) + 5;
+
+        // Check if the bar chart canvas exists before creating the chart
+        var barChartCanvas = document.getElementById('apiUsageBarChart');
+        if (barChartCanvas) {
+            const ctx = barChartCanvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['News API', 'APOD API', 'Pexels API'],
+                    datasets: [{
+                        label: 'API Request Counts',
+                        data: [newsRequests, apodRequests, pexelsRequests],
+                        backgroundColor: ['rgba(245, 225, 179, 0.5)', 'rgba(26, 26, 61, 0.5)', 'rgba(141, 110, 99, 0.5)'],
+                        borderColor: ['#f5e1b3', '#1a1a3d', '#8d6e63'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMin: 0,
+                            suggestedMax: maxRequests
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error("Error: Bar Chart canvas element 'apiUsageBarChart' not found!");
+        }
+
+        // Check if the line chart canvas exists before creating the chart
+        var lineChartCanvas = document.getElementById('apiUsageLineChart');
+        if (lineChartCanvas) {
+            const line = lineChartCanvas.getContext('2d');
+            new Chart(line, {
+                type: 'line',
+                data: {
+                    labels: ['News API', 'APOD API', 'Pexels API'],
+                    datasets: [{
+                        label: 'API Request Counts',
+                        data: [newsRequests, apodRequests, pexelsRequests],
+                        backgroundColor: ['#f5e1b3', '#1a1a3d', '#8d6e63'],
+                        borderColor: ['#000', '#000', '#000'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMin: 0,
+                            suggestedMax: maxRequests
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error("Error: Line Chart canvas element 'apiUsageLineChart' not found!");
+        }
+    });
+</script>
+
+
+<footer th:replace="~{footer}"></footer>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Password Manager - User SignIn</title>
+<link th:replace="~{Resources}">
+
+<style>
+.divider:after, .divider:before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #eee;
+}
+
+.h-custom {
+	height: calc(100% - 73px);
+}
+
+@media ( max-width : 450px) {
+	.h-custom {
+		height: 100%;
+	}
+}
+
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+html {
+			scrollbar-width: thin;
+			scrollbar-color: #c1d0db #1a1a3d !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+</style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg mb-4">
+		<div class="container-fluid">
+			<a class="navbar-brand">Password Manager</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="nav-link "  aria-expanded="false">Error Page</a>
+		</div>
+	</nav>
+	<section class="vh-100">
+		<div class="container-fluid h-custom">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-md-9 col-lg-6 col-xl-5">
+					<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" 
+							class="img-fluid" alt="Sample image">
+				</div>
+				
+			<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+			 	
+				 <article class="card-body">
+				 <div class="card-title"> </div>
+					<h4 class="text-center">Password Manager</h4>
+					<h6>User Sign Up:</h6>
+					<hr>
+					    <form th:action="@{/Authentication/saveUserDetails}" th:method="post">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>First Name :</label>
+                                    <input required name="fname" class="form-control" placeholder="John" type="text">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Last Name :</label>
+                                    <input required name="lname" class="form-control" placeholder="Doe" type="text">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Your email :</label>
+                                    <input required name="email" class="form-control" placeholder="johnDoe@email.com" type="email" th:value="${MailId}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Phone Number :</label>
+                                    <input required name="phone" class="form-control" placeholder="+91" type="number">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Your password :</label>
+                                    <input required class="form-control" placeholder="******" type="password" name="password" oninput="checkPasswords()" id="password">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Confirm password :</label>
+                                    <input required class="form-control" placeholder="******" type="password" name="Cpassword" oninput="checkPasswords()" id="cpassword">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Security Pin :</label>
+                                    <input required class="form-control" placeholder="******" type="number" name="pin" id="pin">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Confirm Pin :</label>
+                                    <input required class="form-control" placeholder="******" type="number" name="cpin" id="cpin">
+                                </div>
+                            </div>
+                            <p>Show Passwords <input type="checkbox" onclick="showpassword()"></p>
+                            <div id="passwordMessage"></div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Register Details</button>
+                            </div>
+                            <p>Click Here if you Have an <a th:href="@{/PasswordManager/signIn}">Account</a></p>
+                        </form>
+			</article>
+				</div>
+				</div>
+			</div>
+	
+
+	</section>
+
+</body>
+<script>
+    function checkPasswords() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('cpassword').value;
+        const message = document.getElementById('passwordMessage');
+
+        if (password !== confirmPassword  ) 
+        {
+            message.innerHTML = "<span style='color: red;'>Passwords do not match.</span>";
+        } 
+        else if((password==='' &&confirmPassword===''))
+        		{
+        	message.innerHTML = "<span style='color: grey;'>Please enter passwords.</span>";
+        		}
+        else 
+        {
+            message.innerHTML = "<span style='color: green;'>Passwords match.</span>";
+        }
+    }
+
+    function showpassword() {
+        const fields = ['password', 'cpassword'];
+        fields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        });
+    }
+</script>
+<footer th:replace="~{footer}"></footer>
+</html>

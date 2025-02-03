@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - NASA-APOD</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
+	<style type="text/css">
+		body {
+			background-color: #0b0c1f !important;
+			/* Dark space background */
+			color: #f1f1f1 !important;
+			/* Light text color for contrast */
+		}
+
+		.search-card {
+			background-color: #1a1a3d !important;
+			color: #f1f1f1 !important;
+			border-radius: 0px !important;
+			padding: 20px;
+			border: 1px solid #4b4b6b;
+		}
+
+		.search-btn {
+			background-color: #00c9ff !important;
+			color: #ffffff;
+
+			border: 1px solid #00c9ff;
+			border-radius: 5px;
+			padding: 8px 16px;
+			transition: all 0.3s ease;
+		}
+
+		.search-btn:hover {
+			background-color: #555555 !important;
+			color: #00c9ff !important;
+			border: 1px solid #00c9ff !important;
+		}
+
+
+		.ast-card {
+			background-color: #a3a8b6 !important;
+			border: 1px solid #b0b7c1 !important;
+			border-radius: 0px !important;
+			overflow: hidden !important;
+			margin-bottom: 20px !important;
+
+		}
+
+
+		.ast-card .card-body {
+			background-color: #c1d0db !important;
+			color: #333333 !important;
+			padding: 20px !important;
+			line-height: 1.6 !important;
+		}
+
+		html {
+			scrollbar-width: thin;
+			scrollbar-color: #c1d0db #1a1a3d !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+.activity-timeline {
+    position: relative;
+}
+
+.activity-item {
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.activity-item {
+    background-color: #f8f9fa;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.activity-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.activity-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.custom-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://e7.pngegg.com/pngimages/312/196/png-clipart-nasa-logo-wallops-island-wallops-flight-facility-visitor-center-glenn-research-center-nasa-insignia-nasa-miscellaneous-blue.png');
+    background-size: cover;
+}
+
+.ai-icon
+{
+   display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://e7.pngegg.com/pngimages/312/196/png-clipart-nasa-logo-wallops-island-wallops-flight-facility-visitor-center-glenn-research-center-nasa-insignia-nasa-miscellaneous-blue.png');
+    background-size: cover;         
+}
+
+
+.bg-success-soft {
+    background-color: #d1e7dd;
+}
+
+.bg-danger-soft {
+    background-color: #f8d7da;
+}
+
+.bg-warning-soft {
+    background-color: #fff3cd;
+}
+
+.bg-info-soft {
+    background-color: #cff4fc;
+}
+	</style>
+
+
+
+</head>
+
+<body>
+
+	<nav th:replace="~{NavBar}"></nav>
+
+	<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 ">
+        <h4 class="mb-0">API Overview</h4>
+    </div>
+
+    <div class="row g-4">  
+     <div class="row mt-4">
+        <div class="col-12">
+            <div class="card search-card" style="border-radius:0px;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4 ">
+                        <h5 class="card-title mb-0">NASA : Astronomy Picture Of The Day</h5> 
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="activity-item bg-transparent border-1"style="border:solid 1px #f1f1f1;border-radius:0px;">
+                                <div class="d-flex gap-3">
+                                    <div class="activity-icon bg-warning-soft text-warning">
+                                        <i class="custom-icon"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="mb-0">External API</h6>
+                                            <span class="activity-date">Unlimited Calls</span>
+                                        </div>
+                                        <p class="text-light mb-2">We Will Make A Request Call To Nasa For You To Provide What They've Dedicated For This Day.</p>
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-warning small me-3"> <i class="fas fa-exclamation-triangle me-2 "></i>Same Response For 24Hrs</span>
+                                            <span class="text-info small me-3"> <i class="fas fa-info-circle me-2"></i>Date Based Search</span>
+                                            <span class="text-light small me-3"> <i class="fas fa-check-circle text-light"></i> Image Response</span>
+                                            <span class="text-danger small me-3"> <i class="fas fa-exclamation-triangle me-2 "></i>Internet Connection Required</span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div><hr>
+                                <div class="list-group-item border-0 d-flex align-items-center px-0 bg-transparent">
+									<div class="activity-icon bg-warning-soft p-2 me-3 ">
+										<i class="ai-icon"></i>
+										
+									</div>
+									<div class="flex-grow-1 ">
+										<h6 class="mb-1 text-light">
+											Hourly Based Charges <small class="me-7 text-light">By NASA</small>
+										</h6>
+
+										<p class="text-light small mb-0 ">
+											The API Supports Hourly Based Requests. If You Made 500 Requests At 10:15AM And 500 Requests At 10:25AM, 
+											Your API Key Would Become Temporarily Blocked. This Temporary Block Of Your API Key Would Cease At 11:15AM,
+											 At Which Point You Could Make 500 Requests. At 11:25AM, You Could Then Make Another 500 Requests. Use With Care.
+
+										</p>
+									</div>
+
+								</div>
+                            </div>
+					   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+	<div class="container mt-4 mb-4">
+		<div class="card search-card">
+			<div class="search-card-body">
+				<form th:action="@{/api/apod}" th:method="post">
+					<div class="row">
+						<div class="col-md-6 " style="border-right: 1px solid #fff;">
+							<h5 class="card-title mb-4">NASA's Astronomy Picture Of The Day: (APOD)</h5>
+							<button type="submit" class="btn btn-outline-dark w-50 mt-3 search-btn ">Find Out</button>
+						</div>
+						<div class="col-md-6">
+
+							<div class="alert alert-info d-flex align-items-center" role="alert">
+								<i class="bi bi-info-circle-fill flex-shrink-0 me-2" style="font-size: 1.5rem; color: #4287f5;"></i>
+								<div>
+									Using NASA's Public API this request will fetch the<br>
+									Astronomy Picture of the current date from Nasa Server.<br>
+									<code style="background-color: #1a1a3d !important; color: #f1f1f1 !important; padding:2px; border-radius:5px;">
+									Sometimes NASA May not Respond to the Current Request.</code> <br>
+									Do understand we're just a platform between you and External Services. This is an Limitless Api will 
+									result the same for 24hrs.
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				<p></p>
+				<p></p>
+				<div th:text="${ApodNull}"></div>
+				<div class="container">
+					<div class="row">
+						<div th:if="${ApodPicture != null}" class="col-12">
+							<div class="card ast-card">
+								<div class="card-body">
+									<h6 class="card-title"><strong>Title: </strong> <span
+											th:text="${ApodPicture.title}"></span></h6>
+									<h6 class="card-title"><strong>Date: </strong> <span
+											th:text="${ApodPicture.date}"></span></h6>
+									<h6><strong>Description: </strong> <span
+											th:text="${ApodPicture.explanation}"></span></h6>
+									<h6><strong>HD-Url: </strong> <a th:href="${ApodPicture.image}" target="_blank"
+											th:text="${ApodPicture.image}"></a> </h6>
+									<h6><strong>Image: </strong> This is an fixed ratio image maynot work properly, use the hd url for better visual</h6>
+									<div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden;">
+										<img alt="NASA_IMG" th:src="${ApodPicture.url}"
+											style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="bsb-service-7 py-5 py-xl-8 ">
+  <div class="container">
+    <div class="row">
+      <div class="col-19">
+        <div class="container-fluid  shadow">
+          <div class="row">
+            <div class="col-12 col-md-6 p-0" style="background-color: #4b4b6b !important; color: #f1f1f1 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5 border-right">
+                  <h5 class="fw-light text-light text-uppercase mb-4">How Does APOD work?</h5>
+                  <p id="ques" class="mb-4 text-light">When you make request in this page you will request will bypass against NASA server via API key 
+                  which is used by the Application and the response will from NASA Server, providing you specifications of particular request.
+                  </p></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 p-0" style="background-color: #4b4b6b !important; color: #f1f1f1 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5">
+                  <h5 class="fw-light text-uppercase mb-4 text-light">Do you keep track of the request calls?</h5>
+                  <p id="ques" class="mb-4 text-light">Yes, every user's API calls will be in our system in this case, the response will be same up-to 24hrs
+                  , you'll get the same output so we will just track you no.of calls</p>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

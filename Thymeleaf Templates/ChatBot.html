@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - Groq Chat</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/abbott.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+	
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			background-color: #f4a261 !important;
+			/* Warm sunset orange */
+			color: #2f3e46 !important;
+			/* Deep grayish blue */
+		}
+
+		.chat-container {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			overflow-y: auto;
+			padding: 10px;
+		}
+
+		.conversation-container {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			/* Reduce vertical space between messages */
+			overflow-y: auto;
+		}
+
+		.message {
+			padding: 5px 10px;
+			/* Adjust padding to reduce unnecessary space */
+			border-radius: 12px;
+			/* Keep rounded corners but less prominent */
+			font-size: 14px;
+			max-width: 70%;
+			word-wrap: break-word;
+			line-height: 1.4;
+			/* Tighter line spacing */
+			margin: 2px 0;
+			/* Reduce spacing between consecutive messages */
+		}
+
+		.message.sent {
+			background: #005e54 !important;
+			color: #fff !important;
+			align-self: flex-end;
+			text-align: right;
+			margin-left: auto;
+			/* Prevent space on the left */
+		}
+
+		.message.received {
+			background: #f2f2f2 !important;
+			color: #333 !important;
+			align-self: flex-start;
+			text-align: left;
+			margin-right: auto;
+			/* Prevent space on the right */
+		}
+
+		.message:empty {
+			display: none;
+			/* Hide empty messages to avoid gaps */
+		}
+
+		.conversation-compose {
+			display: flex;
+			align-items: center;
+			background: #eee !important;
+			padding: 10px;
+			position: sticky;
+
+			width: 100%;
+		}
+
+		.input-msg {
+			flex: 1;
+			border: none;
+			padding: 10px;
+			border-radius: 20px;
+			font-size: 14px;
+			margin: 0 10px;
+			resize: none;
+			background: #fff !important;
+			color: #333 !important;
+		}
+
+		.input-msg::placeholder {
+			color: #aaa !important;
+		}
+
+		.chat {
+			background: #005e54 !important;
+			color: #fff !important;
+			border: none;
+			border-radius: 20px;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		.chat:hover {
+			background: #003d3b !important;
+		}
+
+		/* Style for Webkit-based browsers (Chrome, Edge, Safari) */
+		.conversation-container::-webkit-scrollbar {
+			width: 8px;
+			/* Width of the vertical scrollbar */
+			height: 8px;
+			/* Height of the horizontal scrollbar */
+		}
+
+		.conversation-container::-webkit-scrollbar-thumb {
+			background: #005e54;
+			/* Scrollbar color */
+			border-radius: 4px;
+			/* Rounded corners for the scrollbar */
+		}
+
+		.conversation-container::-webkit-scrollbar-thumb:hover {
+			background: #003d3b;
+			/* Darker shade when hovered */
+		}
+
+		.conversation-container::-webkit-scrollbar-track {
+			background: #f2f2f2;
+			/* Background of the scrollbar track */
+			border-radius: 4px;
+		}
+
+		/* For Firefox */
+		.conversation-container {
+			scrollbar-width: thin;
+			/* Thin scrollbar */
+			scrollbar-color: #005e54 #f2f2f2;
+			/* Thumb color and track color */
+		}
+		html {
+			scrollbar-width: thin;
+			scrollbar-color: #c1d0db #1a1a3d !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<nav th:replace="~{NavBar}"></nav>
+	<div class="chat-container">
+		<div class="conversation-container">
+			<!-- Loop through the conversation history -->
+			<div th:each="conversation : ${history}">
+				<div class="message sent" th:if="${conversation.user}">
+					<b>You:</b> <span th:text="${conversation.user}"></span>
+				</div>
+				<div class="message received" th:if="${conversation.bot}">
+					<b>Model:</b> <span th:text="${conversation.bot}"></span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<p></p>
+	<form class="conversation-compose" th:action="@{/AiModel/Chat/UserMessage}" th:method="post">
+		<textarea class="input-msg" name="usermsg" placeholder="Type a message..." required></textarea>
+		<button class="btn btn-outline-success chat" type="submit">Send</button>
+	</form>
+
+
+</body>
+
+</html>

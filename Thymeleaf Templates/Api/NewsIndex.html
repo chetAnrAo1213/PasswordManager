@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - News</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	
+	<style type="text/css">
+		body {
+			background-color: #7f4b2a !important;
+			color: #f5e1b3 !important;
+		}
+
+		.search-card {
+			background-color: #f5e1b3 !important;
+			color: #7f4b2a !important;
+			padding: 20px;
+			border: 1px solid #c3e5d5;
+		}
+
+		.search-btn {
+			background-color: #f5e1b3 !important;
+			color: #2c5a35;
+			border: 1px solid #c3e5d5;
+			border-radius: 5px;
+			padding: 8px 16px;
+		}
+
+		.search-btn:hover {
+			background-color: #7f4b2a !important;
+			color: #ffffff;
+			border: 1px solid #2c5a35;
+		}
+
+		input.form-control {
+			border: 1px solid #d9cfe7;
+			padding: 8px 12px;
+			font-size: 14px;
+			color: #6a0dad;
+			background-color: #ffffff;
+			transition: all 0.3s ease;
+		}
+
+		input.form-control:focus {
+			border-color: #7f4b2a !important;
+			color: #7f4b2a !important;
+			box-shadow: 0 0 4px rgba(106, 13, 173, 0.5);
+			outline: none;
+		}
+
+		.news-card {
+			background-color: #e0c6a1;
+			/* Darker cream with a hint of brown */
+			border: 1px solid #c89f73;
+			/* Light chocolate border */
+			border-radius: 8px;
+			overflow: hidden;
+			margin-bottom: 20px;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+
+		/* Card Body Styling */
+		.news-card .card-body {
+			background-color: #f5e1b3;
+			/* Light beige */
+			color: #7f4b2a;
+			/* Rich chocolate text */
+			padding: 20px;
+			line-height: 1.6;
+		}
+
+		.news-card .card-body h6 {
+			color: #7f4b2a;
+			/* Chocolate text for titles */
+			margin-bottom: 10px;
+		}
+
+		.news-card .card-body p {
+			margin-bottom: 10px;
+			color: #7f4b2a;
+			/* Chocolate text */
+		}
+
+		/* Link Styling */
+		.news-card a {
+			color: #c47e5a;
+			/* Lighter chocolate for links */
+			text-decoration: underline;
+			font-weight: bold;
+		}
+
+		.news-card a:hover {
+			color: #7f4b2a;
+			/* Darker chocolate on hover */
+			text-decoration: none;
+		}
+
+		/* Card Footer Styling */
+		.news-card .card-footer {
+			background-color: #fce7c2;
+			/* Lighter cream for footer */
+			color: #7f4b2a;
+			/* Chocolate text */
+			padding: 15px;
+			border-top: 1px solid #c89f73;
+			/* Chocolate border */
+			font-size: 0.9rem;
+			text-align: center;
+			border-radius: 0px;
+		}
+
+		html {
+			scrollbar-width: thin;
+			scrollbar-color: #7f4b2a #fce7c2 !important;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+.activity-timeline {
+    position: relative;
+}
+
+.activity-item {
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.activity-item {
+    background-color: #f8f9fa;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.activity-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.activity-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.custom-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU5NE2EXkwAg8oDPLuMxJ0SS94mTXfSzYHiA&s');
+    
+    background-size: cover;
+}
+
+.ai-icon
+{
+   display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://cdn-avatars.huggingface.co/v1/production/uploads/1673913216963-63115d7864939fabc00f0b45.png');
+    background-size: cover;         
+}
+
+
+.bg-success-soft {
+    background-color: #d1e7dd;
+}
+
+.bg-danger-soft {
+    background-color: #f8d7da;
+}
+
+.bg-warning-soft {
+    background-color: #fff3cd;
+}
+
+.bg-info-soft {
+    background-color: #cff4fc;
+}
+.alert-custom {
+    background-color: #f8d7da !important; /* Lightest red (soft pinkish red) */
+    color: #721c24 !important; /* Deep red text for contrast */
+    border-color: #f5c6cb !important; /* Soft red border */
+}
+	</style>
+</head>
+<script>
+        // Auto-dismiss the alert after 3 seconds
+        setTimeout(() => {
+            const alertElement = document.querySelector('.alert-custom');
+            if (alertElement) {
+                alertElement.classList.remove('show'); // Visually hide the alert
+                alertElement.classList.add('fade');   // Apply fade transition
+                setTimeout(() => alertElement.remove(), 200); // Remove element after fade
+            }
+        }, 4000);
+    </script>
+<body>
+
+	<nav th:replace="~{NavBar}"></nav>
+
+<div class="container mt-3">
+        <div th:if="${notificationMessage != null}" 
+             class="alert alert-custom alert-dismissible fade show" 
+             role="alert">
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+            <span th:text="${notificationMessage}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+	<div class="container py-4">
+		<div class="d-flex justify-content-between align-items-center mb-4 ">
+			<h4 class="mb-0">API Overview</h4>
+		</div>
+
+		<div class="row g-4">
+			<div class="row mt-4">
+				<div class="col-12">
+					<div class="card search-card" style="border-radius: 0px;">
+						<div class="card-body">
+							<div
+								class="d-flex justify-content-between align-items-center mb-4 ">
+								<h5 class="card-title mb-0">NewsData.io</h5>
+							</div>
+							<div class="list-group list-group-flush">
+								<div class="activity-item bg-transparent"
+									style="border-radius: 0px;">
+									<div class="d-flex gap-3">
+										<div class="activity-icon bg-warning-soft text-warning">
+											<i class="custom-icon"></i>
+										</div>
+										<div class="flex-grow-1">
+											<div
+												class="d-flex justify-content-between align-items-center mb-2">
+												<h6 class="mb-0">External API</h6>
+												<span class="activity-date">3 Calls per 12 Hour</span>
+											</div>
+											<p class="text-muted mb-2">We Will Make A Request Call
+												Based On Your Query To NewsData.io</p>
+											<div class="d-flex align-items-center">
+												<span class="text-warning small me-3"> <i
+													class="fas fa-exclamation-triangle me-2 "></i>Limited Usage
+												</span> <span class="text-info small me-3"> <i
+													class="fas fa-info-circle me-2"></i>Key Word Based Search
+												</span> <span class="text-danger small me-3"> <i
+													class="fas fa-exclamation-triangle me-2"></i>AI Bypass
+												</span> <span class="text-dark small me-3"> <i
+													class="fas fa-check-circle text-dark"></i> Text Response
+												</span> 
+												<span class="text-danger small me-3"> <i
+													class="fas fa-exclamation-triangle me-2 "></i>Internet
+													Connection Required
+												</span>
+											</div>
+										</div>
+
+
+									</div>
+									<hr>
+									<div
+										class="list-group-item border-0 d-flex align-items-center px-0 bg-transparent">
+										<div class="activity-icon bg-warning-soft p-2 me-3 ">
+											<i class="ai-icon"></i>
+
+										</div>
+										<div class="flex-grow-1 ">
+											<h6 class="mb-1">
+												AI Filter <small class="me-7 text-muted">By Groq</small>
+											</h6>
+
+											<p class="text-muted small mb-0 ">
+												The Search Query Will Undergo Through an AI filter i.e We
+												Will Pass Your Search Query To AI To Check Whether Your
+												Query Is Non-Abusive or Not. <br>Any Abusive Word Or
+												In-Appropraite Words Will Be Rejected, If Your Query Passes
+												The Security Filter Then We Will Bypass Your Search Key To
+												Get News.
+											</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container  mb-4 mt-4">
+		<div class="card search-card " style="border-radius:0px;">
+			<div class="search-card-body ">
+				<form th:action="@{/api/news}" th:method="post">
+					<div class="row">
+						<div class="col-md-6 " style="border-right: 1px solid #000;" >
+							<h5 class="card-title mb-4">Search News:</h5>
+							<input type="text" required class="form-control" name="search" placeholder="Enter search term">
+							<button type="submit" class="btn btn-outline-dark w-50 mt-3 search-btn ">Search</button>
+						</div>
+						<div class="col-md-6">
+
+							<div class="alert alert-warning d-flex align-items-center" role="alert">
+								<i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+									style="font-size: 1.5rem; color: #7f4b2a;"></i>
+								<div>
+									A User can only make 3 requests to see the news.<br>This news
+									request will provide complete details for a particular
+									keyword.<code style="background-color: #7f4b2a !important; color: #fce7c2 !important; padding:2px; border-radius:5px;">
+									Sometimes NewsData.io May not Respond to the Current Request</code>.
+									Do understand we're just a platform between you and External Services.
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+			<div th:if="${limit != null}"><i class="fas fa-exclamation-triangle text-danger"></i> <span th:text="${limit}"></span> </div>
+				
+			<div>
+				
+				<div class="container mt-2">
+					<div class="row">
+						<div th:each="article : ${article}" class="col-12">
+							<div class="card news-card">
+								<div class="card-body">
+									<h6 class="card-title"><strong>Title:</strong> <span
+											th:text="${article.title}"></span></h6>
+									<p><strong>Description:</strong> <span th:text="${article.description}"></span></p>
+									<h6><strong>Article Link:</strong> <a th:href="${article.link}" target="_blank"
+											th:text="${article.link}">Visit</a></h6>
+									<p>Keywords: <span
+											th:text="${article.keywords} ?: 'No information available'"></span></p>
+									<p>Creator: <span th:text="${article.creator}"></span></p>
+									<p>Publish Date: <span th:text="${article.publishDate}"></span> </p>
+									<p><strong>Source:</strong> <a th:href="${article.sourceurl}" target="_blank"
+											th:text="${article.sourceurl}"></a></p>
+									<div class="card-footer">
+										<p>
+											Language: <span th:text="${article.language}"></span> |
+											Country: <span th:text="${article.country}"></span> |
+											Category: <span th:text="${article.category}"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bsb-service-7 py-5 py-xl-8">
+  <div class="container">
+    <div class="row">
+      <div class="col-19">
+        <div class="container-fluid bg-dark shadow">
+          <div class="row">
+            <div class="col-12 col-md-6 p-0" style="background-color: #c47e5a !important; color: #f5e1b3 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5 border-right">
+                  <h5 class="fw-light text-light text-uppercase mb-4">How Do you get news?</h5>
+                  <p id="ques" class="mb-4 text-light">The API will fetch the news according to you search query and based on that it will fetch the latest 
+                  news,articles,sources & URL to the news. However, 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:3px; border-radius:5px;">
+                  User should only use keywords</code> because that's how this particular API work.
+                  </p></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 p-0" style="background-color: #c47e5a !important; color: #f5e1b3 ;">
+              <div class="card border-0 bg-transparent">
+                <div class=" text-center p-5">
+                  <h5 class="fw-light text-uppercase mb-4 text-light">Fair Usage Warning!</h5>
+                  <p id="ques" class="mb-4 text-light">Your search query will get bypass from our system. 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:2px; border-radius:5px;">We use AI to check</code> whether your search query is 
+                  <code style="background-color: #f1f1f1 !important; color: #000; padding:2px; border-radius:5px;">appropriate</code> or not.
+                  Any Abusive words or Foul Language in search query will be rejected by our system. Use wisely</p>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

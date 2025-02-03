@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - Note</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/abbott.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<style>
+		.noteBody {
+			background-color: #f7f9fc;
+		}
+
+		.card {
+			background-color: #ffffff;
+			border: 1px solid #d3d6db;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+
+		.card-body {
+			background-color: #d9cfe7;
+			padding: 20px;
+		}
+
+		input.form-control {
+			border: 1px solid #d9cfe7;
+
+			padding: 8px 12px;
+			font-size: 14px;
+			color: #6a0dad;
+			background-color: #ffffff;
+			transition: all 0.3s ease;
+		}
+
+		input.form-control:focus {
+			border-color: #6a0dad;
+			box-shadow: 0 0 4px rgba(106, 13, 173, 0.5);
+			outline: none;
+		}
+
+
+		button.addnote {
+			background-color: #b3a7d9;
+			color: #3e1f10;
+			font-size: 14px;
+			border: 1px solid #b3a7d9;
+			border-radius: 4px;
+			padding: 8px 16px;
+			transition: all 0.3s ease;
+		}
+
+		button.addnote:hover {
+			background-color: #9c84c2;
+			color: #2a1309;
+			box-shadow: 0 0 8px rgba(61, 28, 15, 0.4);
+			border: 1px solid #9c84c2;
+		}
+
+
+.alert-custom {
+    background-color: #f3e8fd !important; 
+    color: #6f42c1 !important; 
+    border-color: #dabaf8 !important; 
+}
+
+
+
+		.alert-info {
+			background-color: #dff0ff;
+			color: #31708f;
+			border: 1px solid #bde5f8;
+		}
+		
+	body
+	{
+	 background-color: #e1c6e8 !important; 
+	}
+		
+	</style>
+</head>
+<script>
+        setTimeout(() => {
+            const alertElement = document.querySelector('.alert-custom');
+            if (alertElement) 
+            {
+                alertElement.classList.remove('show'); 
+                alertElement.classList.add('fade');   
+                setTimeout(() => alertElement.remove(), 300); 
+            }
+        } , 2500);
+    </script>
+<body class="noteBody">
+	<nav th:replace="~{NavBar}"></nav>
+	<p></p>
+	<p></p>
+	 <div class="container mt-3">
+        <div th:if="${notificationMessage != null}" 
+             class="alert alert-custom alert-dismissible fade show" 
+             role="alert">
+            <i class="bi bi-info-circle-fill"></i>
+            <span th:text="${notificationMessage}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+	<div class="container mt-4 mb-4">
+		<div class="card">
+			<article class="card-body">
+				<div class="row align-items-center mb-4">
+					<div class="col-md-6">
+						<ul class="nav nav-pills card-header-pills">
+							<li class="nav-item">
+								<a class="nav-link disabled" tabindex="-1" aria-disabled="true">
+									<h5>Quick Note</h5>You can add a note for your password ID
+								</a>
+							</li>
+						</ul>
+					</div>
+
+				
+
+					<div class="col-md-6">
+						<div class="alert alert-info info d-flex align-items-center" >
+							<i class="bi bi-info-circle-fill flex-shrink-0 me-2"
+								style="font-size: 1.5rem; color: blue;"></i>
+							<div>A User can only use 1 note. You can save/update based <br>on your needs. But user
+								cannot delete note, because <br>it's just a simple note.<br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr />
+
+
+				<form th:action="@{/QuickNote/addNote}" th:method="post">
+					<div class="addNotes">
+						<div class="form-row">
+							<div class="form-group col-md-6 border-right">
+								<h6>Note Title:</h6>
+								<input required name="NoteTitle" class="form-control" type="text"
+									placeholder="e.g. note for password 'xyz'" />
+							</div>
+							<div class="form-group col-md-6">
+								<h6>Note Tags:</h6>
+								<input required name="Notetags" class="form-control" type="text"
+									placeholder="e.g. social, studies, fun. . ." />
+							</div>
+						</div>
+
+						<!-- Row for Note Content -->
+						<div class="form-row mt-3">
+							<h6>Note Content:</h6>
+							<textarea id="inputNote" name="NoteContent" class="form-control"></textarea>
+						</div>
+						<p></p>
+						<p></p>
+						<div>
+							<button type="submit" class="btn addnote btn-outline-info"> Save/Update Note</button>
+
+						</div>
+					</div>
+				</form>
+			</article>
+		</div>
+	</div>
+
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+
+<script>
+	var noteEditor = CodeMirror.fromTextArea(document.getElementById('inputNote'), {
+		lineNumbers: true,
+		theme: 'dracula',
+	});
+
+	noteEditor.setSize("100%", "350px");
+</script>
+<footer th:replace="~{footer}"></footer>
+</html>

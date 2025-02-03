@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Manager - Admin</title>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+.navbar {
+    background-color: #0b2c3d !important;
+    color: #b69a53 !important;
+}
+
+.navbar a {
+    color: #b69a53 !important;
+}
+
+.navbar a:hover {
+    color: #fff !important;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #0b2c3d #b69a53 !important;
+}
+
+body::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+.main::-webkit-scrollbar 
+{
+width: 8px;
+    height: 8px;
+}
+.main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color:#000;
+    color:#fff;  
+}
+
+.col-md-3 {
+    max-height: 500px;
+    overflow-y: auto;
+    width: 25%;
+    padding-right: 10px;
+    margin-left: 0;
+}
+
+.col-md-6 {
+    width: 65%;
+    margin-left: 20px; /* Add space between the sidebar and fetch div */
+}
+
+.alert-custom {
+    background-color: #f8d7da !important; 
+    color: #721c24 !important; 
+    border-color: #f5c6cb !important; 
+}
+</style>
+<script>
+    setTimeout(() => {
+        const alertElement = document.querySelector('.alert');
+        if (alertElement) {
+            alertElement.classList.remove('show'); 
+            alertElement.classList.add('fade');   
+            setTimeout(() => alertElement.remove(), 300);
+        }
+    }, 2500);
+</script>
+<body>
+<nav th:replace="~{/Admin/navBar}"></nav>
+
+<div class="main">
+    <div class="col-md-3 mt-5" >
+        <span style="font-weight: 600; color: #9B5DE5;">Registered Users</span>
+        <p class="text-light mt-1">Based on the registered email, you can find the entire data of a particular user, except passwords.</p>
+        <div class="py-2 px-3">
+            <div class="border-bottom py-2" th:each="i, j : ${users}">
+                <span class="me-2" style="font-weight: 600; color: #9B5DE5;" th:text="${j.count} + '.'"></span> 
+                <span th:text="${i}" class="text-light"></span>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-md-6 mt-5" style="background-color:#343434;color:#F8F8FF; padding:20px;">
+        <span style="font-weight: 600; color: #9B5DE5;">Fetch User Data</span>
+        <p class="text-light"> Paste the user's email from the list below to fetch specific details.<br> 
+            <span class="text-warning small"> 
+                <i class="fas fa-exclamation-triangle me-2"></i>No White Spaces
+            </span>. Make sure you are not giving any spaces.
+        </p>
+        <form th:action="@{/PasswordManager/Admin/UserSpecifics/getUserData}" th:method="post">
+            <label for="encryptedCode" class="">Enter Email from the list:</label>
+            <input required id="encryptedCode" name="usermail" class="form-control mb-3" placeholder="Enter Mail ID" type="text">
+            <button type="submit" class="btn btn-outline-info w-100">Fetch User Data</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

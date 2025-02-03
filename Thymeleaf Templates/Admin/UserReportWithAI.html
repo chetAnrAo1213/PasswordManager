@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Manager - Admin</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/abbott.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+
+	<style type="text/css">
+
+
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #c1d0db #1a1a3d !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+
+.main
+{
+   background-color: #000 !important;
+   color:#fff !important;
+}
+.search-card
+{
+    background-color:#343434 !important;
+    color:#F8F8FF !important;
+    padding : 15px;
+}
+</style>
+
+</head>
+
+<body class="main">
+
+ <nav th:replace="~{/Admin/navBar}"></nav>
+
+	
+	<div class="container mt-4 mb-4">
+		<div class="card search-card">
+			<div class="search-card-body">
+				<form th:action="@{/PasswordManager/Admin/UserReport/fetchAiReportForUser}" th:method="post">
+					<div class="row">
+						<div class="col-md-6" style="border-right: 1px solid #000;">
+						  <h5 class="card-title mb-4">AI Analysis and Fraud Detection For User:</h5>
+							<input type="text" required class="form-control" name="usermail" placeholder="Enter UserMail Id">
+						 	 <label class="mt-3">Select AI Model:</label>
+							   <select class="form-control" name="ai">
+								 <option value="llama-3.3-70b-versatile">Llama V3.3 by Meta</option>
+								 <option value="deepseek-r1-distill-llama-70b">DeepSeek with Llama by Meta</option>
+							   </select>
+							<button type="submit" class="btn btn-outline-light w-50 mt-3 search-btn">Search</button>
+						</div>
+
+						<div class="col-md-6 mt-3">
+							<div class="alert alert-info d-flex align-items-center" role="alert">
+								<i class="bi bi-info-circle-fill flex-shrink-0 me-2" style="font-size: 1.5rem; color: #4287f5;"></i>
+								<div>
+									Using Groq Cloud Ai Models you can send user complete data to the AI model to get analysis report.<br>
+									<code style="background-color: #1a1a3d !important; color: #f1f1f1 !important; padding:2px; border-radius:5px;">
+									Internet Connection Required. Some times may not respond due to high latency.</code> Responses may find in-accurate,
+									do understand we are just a platform between you and external API. Any errors from the external 
+									api will not be responsible from our system.
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				
+				
+				
+			</div>
+		</div>
+
+		<span th:if="${AiAnalysisReport != null}">
+			<div class="card mt-4 rounded-0">
+				<div class="card-header">User AI Analysis Report</div>
+				<div class="card-body"
+					style="background-color: #343434; color: #F8F8FF;">
+					<span th:utext="${AiAnalysisReport}" class="d-block text-light"></span>
+				</div>
+			</div>
+		</span>
+
+	</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+
+
+<footer th:replace="~{footer}"></footer>
+</html>

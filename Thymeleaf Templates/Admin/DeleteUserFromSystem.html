@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Manager - Admin</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #0b2c3d #b69a53 !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+.search-card
+{
+    background-color:#343434 !important;
+    color:#F8F8FF !important;
+    padding : 15px;
+}
+		
+	.alert-custom {
+    background-color: #f8d7da !important; 
+    color: #721c24 !important; 
+    border-color: #f5c6cb !important; 
+}	
+	
+.main
+{
+    background-color: #0f0f0f;
+}		
+</style>
+<script>
+ setTimeout(() => {
+            const alertElement = document.querySelector('.alert-custom');
+            if (alertElement) {
+                alertElement.classList.remove('show'); 
+                alertElement.classList.add('fade');   
+                setTimeout(() => alertElement.remove(), 300);
+            }
+        }, 2500);
+    </script>
+<body class="main">
+
+    
+    <nav th:replace="~{/Admin/navBar}"></nav>
+<div class="container mt-3">
+		<div th:if="${notificationMessage != null}"
+			class="alert alert-custom alert-dismissible fade show" role="alert">
+			<i class="bi bi-info-circle-fill"></i> <span
+				th:text="${notificationMessage}"></span>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="container  mb-4 mt-4">
+		<div class="card search-card " style="border-radius:0px;">
+			<div class="search-card-body ">
+				<form th:action="@{/PasswordManager/Admin/DeleteUser/deleteByUserMailId}" th:method="post">
+					<div class="row">
+						<div class="col-md-6">
+							<h5 class="card-title mb-4">Delete User:</h5>
+							<input type="text" required class="form-control" name="usrDelete" placeholder="Enter user mail">
+							<button type="submit" class="btn btn-outline-light w-50 mt-3  ">Delete From System</button>
+						</div>
+						<div class="col-md-6" >
+
+							<div class="alert alert-warning d-flex align-items-center" role="alert">
+								<i class="bi bi-exclamation-triangle-fill  me-2 text-danger"></i>
+								<div>
+									Admin can delete a Spam user and bases on the analysis.<br>
+								<code style="background-color: #7f4b2a !important; color: #fce7c2 !important; padding:2px; border-radius:5px;">
+									This is a process cannot be undone</code>.
+									After deletion of the user, please visit Specific Details page to see whether deletion is successful or not.
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+			<div th:if="${limit != null}"><i class="fas fa-exclamation-triangle text-danger"></i> <span th:text="${limit}"></span> </div>
+				
+			<div>
+				
+				<div class="container mt-2">
+					<div class="row">
+						<div th:each="article : ${article}" class="col-12">
+							<div class="card news-card">
+								<div class="card-body">
+									<h6 class="card-title"><strong>Title:</strong> <span
+											th:text="${article.title}"></span></h6>
+									<p><strong>Description:</strong> <span th:text="${article.description}"></span></p>
+									<h6><strong>Article Link:</strong> <a th:href="${article.link}" target="_blank"
+											th:text="${article.link}">Visit</a></h6>
+									<p>Keywords: <span
+											th:text="${article.keywords} ?: 'No information available'"></span></p>
+									<p>Creator: <span th:text="${article.creator}"></span></p>
+									<p>Publish Date: <span th:text="${article.publishDate}"></span> </p>
+									<p><strong>Source:</strong> <a th:href="${article.sourceurl}" target="_blank"
+											th:text="${article.sourceurl}"></a></p>
+									<div class="card-footer">
+										<p>
+											Language: <span th:text="${article.language}"></span> |
+											Country: <span th:text="${article.country}"></span> |
+											Category: <span th:text="${article.category}"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

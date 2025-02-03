@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Password Manager -Error Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+.enc {
+	background-color: #0f0000 !important;
+	color: #b31313 !important;
+	padding: 20px;
+	border: 1px solid #f1f1f1; 
+}
+
+body {
+	background-color: #0f0000 !important;
+	color: #b31313 !important;
+}
+
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #0f0000 #b31313 !important;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg">
+		<div class="container-fluid">
+			<a class="navbar-brand">Password Manager</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="nav-link "  aria-expanded="false">Error Page</a>
+		</div>
+	</nav>
+
+	<div class="container mt-4 mb-4">
+		<div class="card rounded-0">
+			<article class="card-body enc">
+				<h5 class="card-title text-center mb-4 mt-1">You Have Encountered An Error</h5>
+				<div class="row">
+					<div class="col-md-9 left-div">
+						<h6>Error Page :</h6>
+						<hr>
+						<div class="form-group">
+							<h6 th:utext="${ErrorName}">:</h6>
+							<p class="text-center text-light" th:utext="${Error}"></p>
+						</div>
+					</div>
+
+				</div>
+				<p></p>
+				<p></p>
+
+			</article>
+		</div>
+	</div>
+
+</body>
+<footer th:replace="~{footer}"></footer>
+</html>

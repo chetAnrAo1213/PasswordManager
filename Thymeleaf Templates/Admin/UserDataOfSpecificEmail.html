@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Manager - Admin</title>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+</head>
+<style>
+.navbar {
+	background-color: #0b2c3d !important;
+	color: #b69a53 !important;
+}
+
+.navbar a {
+	color: #b69a53 !important;
+}
+
+.navbar a:hover {
+	color: #fff !important;
+}
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+    height: 8px;
+}
+
+.trend-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.main
+{
+   background-color: #000;
+   color:#fff;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #0b2c3d #b69a53 !important;
+}
+
+body::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+</style>
+<body class="main">
+	<nav th:replace="~{/Admin/navBar}"></nav>
+	
+
+<div class="container py-4">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">User Data Overview</h4>
+        
+    </div>
+ <p></p>
+    
+    <div class="row g-4" >
+        <div class="col-12 col-md-9 col-lg-6">
+            <div class="card stat-card border-0 shadow-lg">
+                <div class="card-body" style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="stat-icon bg-info bg-opacity-10 text-primary me-4"> <i class="fas fa-user-circle"></i></div>
+                    	<h5 class="text-light mb-2">User Details</h5>
+                    </div>
+                    <hr>
+                      <div class="text-light" th:if="${Registration!=null}">                       
+                       <h6>User Id   : <span th:text="${Registration.id}"></span></h6>
+                       <h6>First Name : <span th:text="${Registration.fname}"></span></h6>
+                       <h6>Last Name  : <span th:text="${Registration.lname}"></span></h6>
+                       <h6>Email Id   : <span th:text="${Registration.email}"></span></h6>
+                       <h6>Phone No   : <span th:text="${#strings.substring(Registration.phone, 0, 5)}"></span>xxxxx</h6>
+                       <h6>Password   : <span th:if="${Registration.cpassword != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Privacy Policy</span></h6>
+                       <h6>User Pin   : <span th:if="${Registration.cpin != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Privacy Policy</span></h6>
+                       <h6>Questions  : <span th:text="${Registration.urq != null ? 'True' : 'No info available'}"></span></h6>
+                     </div>
+                     <h6 th:unless="${Registration!=null}" class="text-danger">No User Found.</h6>
+                </div>
+            </div>
+        </div>
+
+      
+         <div class="col-12 col-md-9 col-lg-6">
+            <div class="card stat-card border-0 shadow-lg">
+                <div class="card-body" style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="stat-icon bg-info bg-opacity-10 text-primary me-4"> <i class="fas fa-user"></i> </div>
+                    	<h5 class="text-light mb-2">User Security Questions</h5>
+                    </div>
+                    <hr>
+                    <div class="text-light" th:if="${Registration!=null}">   
+                       <h6 >User Id    : <span th:text="${Registration.id}"></span></h6>
+                       <h6>Email Id   : <span th:text="${Registration.email}"></span></h6>
+                       <h6>Question1  : <span> User First School</span></h6>
+                       <h6>Answer 1   : <span th:if="${Questions != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Privacy Policy</span></h6>
+                       <h6>Question2  : <span> User Favourite Color</span></h6>
+                       <h6>Answer 2   : <span th:if="${Questions != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Privacy Policy</span></h6>
+                       <h6>Question3  : <span> User Favourite Movie</span></h6>
+                       <h6>Answer 3   : <span th:if="${Questions != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Privacy Policy</span></h6>
+                     </div>
+                     <h6 th:unless="${Registration!=null}" class="text-danger">No Questions Found.</h6>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Orders Card -->
+        <div class="col-12 col-md-9 col-lg-6">
+            <div class="card stat-card border-0 shadow-lg">
+                <div class="card-body" style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="stat-icon bg-info bg-opacity-10 text-primary me-4"> <i class="fas fa-sticky-note"></i> </div>
+                    	<h5 class="text-light mb-2">User Note</h5>
+                    </div>
+						<hr>
+						<div class="text-light" th:if="${Note != null}">
+							<h6>
+								Note Id : <span th:text="${Note.id}"></span>
+							</h6>
+							<h6>
+								Note Title : <span th:text="${Note.title}"></span>
+							</h6>
+							<h6>
+								Note Tags : <span th:text="${Note.tags}"></span>
+							</h6>
+							<h6>
+								Created Date : <span th:text="${Note.createDate}"></span>
+							</h6>
+							<h6>
+								Note Content: <span th:text="${Note.content}"></span>
+							</h6>
+							<h6>
+								Modified Date : <span th:text="${Note.lastModifiedDate}"></span>
+							</h6>
+						</div>
+						<h6 th:unless="${Note != null}" class="text-danger">No note found.</h6>
+
+					</div>
+            </div>
+        </div>
+
+        <!-- Revenue Card -->
+        <div class="col-12 col-md-9 col-lg-6">
+            <div class="card stat-card border-0 shadow-lg">
+                <div class="card-body" style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="stat-icon bg-info bg-opacity-10 text-primary me-4"><i class="fas fa-external-link-alt"></i></div>
+                    	<h5 class="text-light mb-2">User API Calls</h5>
+                    </div>
+                    <hr>
+
+                      <div class="text-light" th:if="${Api!=null}">     
+                       <h6>API Id    : <span th:text="${Api.id}"></span></h6>
+                       <h6>APOD Last TimeStamp : <span th:text="${Api.apodSearchKey}"></span></h6>
+                        <h6>Pexels Last TimeStamp: <span th:text="${Api.pexelSearchKey}"></span></h6>
+                       <h6>News Last TimeStamp: <span th:text="${Api.newsTimeStamp}"></span></h6>
+                       <h6>News Last Search Key: <span th:text="${Api.searchKey}"></span></h6>
+                       <h6>News Next TimeStamp  : <span th:text="${Api.nextTimeStamp}"></span></h6>  
+                     </div>
+                     <h6 th:unless="${Api!=null}" class="text-danger">No Data Found.</h6>
+                  </div>
+                </div>
+            </div>
+            
+           
+        </div>
+    </div>
+
+   
+
+<div class="container py-5">
+    <!-- Activity Section -->
+    <div class="row d-flex justify-content-center align-items-start mt-2">
+        <!-- API Calls Report (Left) -->
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card stat-card border-0 shadow-lg">
+                <div class="card-body" style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="stat-icon bg-info bg-opacity-10 text-primary me-4">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <h5 class="text-light mb-2">API Calls Report</h5>
+                    </div>
+                    <div class="text-light text-center" th:if="${Api!=null}"> 
+                        <canvas id="apiUsageBarChart" width="10" height="10"></canvas>
+                    </div>
+                    <h6 th:unless="${Api != null}" class="text-danger text-center">No API Records Found.</h6>  
+                </div>
+            </div>
+        </div>
+
+        <!-- User Passwords Table (Right) -->
+        <div class="col-lg-8 col-md-12">
+            <div class="card border-0 shadow">
+                <div class="card-body"style="background-color:#343434;color:#F8F8FF;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="card-title mb-0 text-center w-100">User Passwords</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item border-0 d-flex justify-content-center align-items-center px-0">
+                            <div class="table-responsive text-center w-100">
+                                <table class="table table-bordered table-striped mx-auto">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>About</th>
+            <th>Tags</th>
+            <th>Date</th>
+            <th>Phone</th>
+            <th>Pin</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+        </tr>
+    </thead>
+    <tbody id="password-rows" style="background-color:#343434;color:#F8F8FF;">
+        <!-- Check if userStoredPasswords is not empty -->
+        <tr th:if="${userStoredPasswords != null and not #lists.isEmpty(userStoredPasswords)}" 
+            th:each="password : ${userStoredPasswords}" >
+            <td ><span th:text="${password.id}"></span></td>
+            <td><span th:text="${password.title}"></span></td>
+            <td><span th:text="${password.about}"></span></td>
+            <td><span th:text="${password.tags}"></span></td>
+            <td><span th:text="${password.createddate}"></span></td>
+            <td><span th:if="${password.phone != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Private</span></td>
+            <td><span th:if="${password.pin != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Private</span></td>
+            <td><span th:if="${password.username != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Private</span></td>
+            <td><span th:if="${password.mailid != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Private</span></td>
+            <td><span th:if="${password.password != null}"><i class="fas fa-exclamation-triangle text-danger"></i></span> <span class="text-danger">Private</span></td>
+        </tr>
+
+        <!-- Show message if no passwords are found -->
+        <tr th:unless="${userStoredPasswords != null and not #lists.isEmpty(userStoredPasswords)}">
+            <td colspan="10" class="text-center text-danger">No Password Records Found.</td>
+        </tr>
+    </tbody>
+</table>
+
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:inline="javascript">
+    /* Handle null case safely */
+    var apiData = /*[[${Api}]]*/ null;
+
+    var newsRequests = apiData && apiData.newsRequestCalls != null ? apiData.newsRequestCalls : 0;
+    var apodRequests = apiData && apiData.apodRequestCalls != null ? apiData.apodRequestCalls : 0;
+    var pexelsRequests = apiData && apiData.pexelRequestCalls != null ? apiData.pexelRequestCalls : 0;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const chartCanvas = document.getElementById('apiUsageBarChart');
+
+        // Ensure the canvas element exists before initializing the chart
+        if (chartCanvas) {
+            const ctx = chartCanvas.getContext('2d');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['News API', 'APOD API', 'Pexels API'],
+                    datasets: [{
+                        label: 'API Request Counts',
+                        data: [newsRequests, apodRequests, pexelsRequests],
+                        backgroundColor: ['rgba(245, 225, 179, 0.5)', 'rgba(26, 26, 61, 0.5)', 'rgba(141, 110, 99, 0.5)'],
+                        borderColor: ['#f5e1b3', '#1a1a3d', '#8d6e63'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMin: 0,
+                            suggestedMax: Math.max(newsRequests, apodRequests, pexelsRequests) + 2
+                        }
+                    },
+                    categoryPercentage: 0.3
+                }
+            });
+        } else {
+            console.warn("Chart element with ID 'apiUsageBarChart' not found.");
+        }
+    });
+</script>
+
+<footer th:replace="~{footer}"></footer>
+</html>
