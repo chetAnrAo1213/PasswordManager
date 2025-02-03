@@ -1,8 +1,7 @@
 # PasswordManager
 Password Manager is a Tool that is used to store your passwords with security. Provides complete User Authentication and Authorization 
-
-
 ________________________________________________
+
 # Project Configuration
 Frontend           :- Thymeleaf Engine, Html, Css, Js,Chart.js.
 Backend            :- SpringBoot(V3.4), JPA(Hibernate), SpringSecurity.     
@@ -10,9 +9,9 @@ DataBase           :- MySql(V.8)
 External API       :- Newsdata.io, Pexeles, Nasa.
 AI Cloud Platform  :- Groq Cloud
 Project Management :- Maven.
+_______________________________________________
 
-#_______________________________________________
-Project Overview : 
+# Project Overview : 
 	User: 
 			1) Complete Authentication for the user :
 				Password, Pin, Questions based Authentication, Mail Verification, Reset Password.
