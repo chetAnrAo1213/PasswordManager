@@ -14,6 +14,20 @@ External API       : Newsdata.io, Pexeles, Nasa.
 AI Cloud Platform  : Groq Cloud
 
 Project Management : Maven.
+
+________________________________________________
+
+# Project Configuration (PRODUCTION)
+Deployment Platform : Koyeb via DockerImage
+
+Codebase            : SpringBoot.     
+
+DataBase            : CloudClever(MySql-V8)
+
+Memory              : Database(10Mb), Deployment(5GB).  
+
+Project Management  : Maven.
+
 _______________________________________________
 
 # Project Overview : 
