@@ -68,5 +68,5 @@ _______________________________________________
        
  Encyrption : 
  		
-   		Visit this playlist from YouTube. It has a tutorial on How to apply [Symmentric Encryption](https://youtube.com/playlist?list=PLtgomJ95NvbPDMQClkBZPijLdEFyo0VHa&feature=shared)
-     		against a text.
+   		Visit this playlist from YouTube. It has a tutorial on How to apply Symmentric Encryption against a text.
+     		Link :- https://youtube.com/playlist?list=PLtgomJ95NvbPDMQClkBZPijLdEFyo0VHa&feature=shared
