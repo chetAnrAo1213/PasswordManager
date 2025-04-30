@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDetailsEncryption {
 
-    private static final String SECRET_KEY_BASE64 = "k8vN4rGQDdQ1tjZpRVspFq93vmpJREJst4DFtGPOxOo=";
-    private static final String IV_BASE64 = "LearningIV12"; 
+    private static final String SECRET_KEY_BASE64 = "***";
+    private static final String IV_BASE64 = "***"; 
 
     private static final int TAG_LENGTH = 128;
 
