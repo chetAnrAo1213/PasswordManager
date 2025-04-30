@@ -55,7 +55,7 @@ public class AbusiveService
 
 	            HttpHeaders headers = new HttpHeaders();
 	            headers.setContentType(MediaType.APPLICATION_JSON);
-	            headers.setBearerAuth("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");
+	            headers.setBearerAuth("");
 
 	            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(input, headers);
 
